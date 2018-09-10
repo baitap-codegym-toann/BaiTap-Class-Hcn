@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rectangle</title>
+</head>
+<body onload="docready()">
+<div><p align="center">
+    <canvas id="canvas" style="width: 100%;height: 100%;"></canvas>
+    </p>
+</div>
+<div>
+    <form>
+        <p align="center"><input id="height"  type="number" value="1" placeholder="height"></p>
+        <p align="center"><input type="number" value="1" id="width" placeholder="width" ></p>
+    </form>
+</div>
+<p align="center" id="output"></p>
+<script>
+    let Rectangle = function (width, height) {
+        this.width = Number(width);
+        this.height = Number(height);
+        this.dienTich = function () {
+            return this.width * this.height;
+        };
+        this.chuVi = function () {
+            return (this.width + this.height) * 2;
+        };
+        this.draw = function () {
+            let c = document.getElementById("canvas");
+            let ctx = c.getContext("2d");
+            ctx.clearRect(30,30,(100 * this.height / this.width),100);
+            ctx.moveTo(30, 30);
+            ctx.lineTo((30), (100));
+            ctx.lineTo((100 * this.height / this.width), (100));
+            ctx.lineTo((100 * this.height / this.width), (30));
+            ctx.lineTo(30, 30);
+            ctx.stroke();
+        };
+    };
+
+    let hcn = new Rectangle(1,1);
+    function docready() {
+        window.addEventListener("keydown",function (e) {
+            if (e.key ==="Enter"){
+                hcn.width = Number(document.getElementById("width").value);
+                hcn.height = Number(document.getElementById("height").value);
+                hcn.draw();
+                document.getElementById("output").innerHTML =
+                    "chu vi là: "+hcn.chuVi()
+                    +", diện tích là: "+hcn.dienTich();
+            }
+        })
+    }
+</script>
+</body>
+</html>
